@@ -26,4 +26,25 @@ router.post('/subscribe', (req: Request, res: Response) => {
         .catch((err: any) => res.json({ message: "Ops, we have a problem! this is a error: " + err }))
 })
 
+router.get('/messages', (req: Request, res: Response) => {
+    const example = [
+        { id: 1, message: "example 1" },
+        { id: 2, message: "example 2" },
+        { id: 3, message: "example 3" },
+        { id: 4, message: "example 4" }
+    ]
+
+    return res.json(example)
+})
+
+router.post('/send_message', (req: Request, res: Response) => {
+    const
+        id = req.body.id,
+        text = req.body.text,
+        name = req.body.user.name,
+        avatar_url = req.body.user.avatar_url 
+
+    res.json({ id, text, user: {name, avatar_url} })
+})
+
 export = router

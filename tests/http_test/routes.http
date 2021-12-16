@@ -13,3 +13,18 @@ Content-Type: application/json
     "marketing": false,
     "police": true
 }
+
+### Route - root
+GET http://localhost:3000/messages
+### Route - send_comments
+POST http://localhost:3000/send_message
+Content-Type: application/json
+
+{
+    "id": ,
+    "text": "",
+    "user": {
+        "name": "",
+        "avatar_url": "" 
+    }
+}
