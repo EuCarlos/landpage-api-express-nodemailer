@@ -1,18 +1,19 @@
 import express, { response } from 'express'
-require('dotenv').config()
+import routesAPI from './routes/routes'
+import 'dotenv/config'
+import cors from 'cors'
 
 const app = express()
-
-app.get('/', (req, res) => {
-    return res.json({ 
-        message: "Welcome to my API",
-        author: "Carlos Alves",
-        repo_link:  "https://github.com/EuCarlos/landpage-api-express-nodemailer",
-        website: "https://carlosalves.now.sh"
-    })
-})
-
-
 const port = process.env.PORT || 3333
+
+// Config CORS
+const allowedOrigins = [`https://localhost:${port}`]
+const options: cors.CorsOptions = { origin: allowedOrigins }
+
+
+app.use(cors(options))
+app.use(express.json())
+
+app.use('/', routesAPI)
 
 app.listen(port, () => console.log(`🔥 Server is running in PORT ${port}`))
