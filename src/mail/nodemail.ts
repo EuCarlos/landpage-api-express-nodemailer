@@ -1,10 +1,10 @@
 import 'dotenv/config'
 import mailer from 'nodemailer'
 
-function nodemail(name: string, email: string) {
+const nodemail = async (name: string, email: string) => {
     const transporter = mailer.createTransport({
         host: process.env.HOST_MAIL,
-        secure: process.env.SECURE_MAIL,
+        secure: false,
         auth: {
             user: process.env.USER_MAIL,
             pass: process.env.PASSWORD_MAIL
@@ -14,7 +14,7 @@ function nodemail(name: string, email: string) {
         }
     })
 
-    transporter.sendMail({
+    await transporter.sendMail({
             from: process.env.NAME_MAIL +  ' <' + process.env.USER_MAIL + '>',
             to: [email],
             subject: '[LandPage Carlos Alves]: Seu E-book chegou - Baixe o agora mesmo',
