@@ -1,5 +1,6 @@
 import 'dotenv/config'
 import mailer from 'nodemailer'
+import template from './template'
 
 const nodemail = async (name: string, email: string) => {
     const transporter = mailer.createTransport({
@@ -19,7 +20,7 @@ const nodemail = async (name: string, email: string) => {
             to: [email],
             subject: '[LandPage Carlos Alves]: Seu E-book chegou - Baixe o agora mesmo',
             text: `Olá ${name}, seu e-book acabou de chegar baixe ele agora`,
-            html: '<p>Esse é um email de teste</p>'
+            html: template(name)
     })
 }
 
