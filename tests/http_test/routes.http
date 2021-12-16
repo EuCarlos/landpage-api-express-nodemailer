@@ -1,0 +1,15 @@
+### Route - root
+GET http://localhost:3000/
+
+### Route - subscribe
+POST http://localhost:3000/subscribe
+Content-Type: application/json
+
+{
+    "name": "",
+    "email": "",
+    "company": "",
+    "website": "",
+    "marketing": false,
+    "police": true
+}

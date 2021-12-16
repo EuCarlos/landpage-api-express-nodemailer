@@ -7,7 +7,7 @@ const app = express()
 const port = process.env.PORT || 3333
 
 // Config CORS
-const allowedOrigins = [`https://localhost:${port}`]
+const allowedOrigins = [`http://localhost:${port}`]
 const options: cors.CorsOptions = { origin: allowedOrigins }
 
 

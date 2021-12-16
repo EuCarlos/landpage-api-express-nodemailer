@@ -1,6 +1,9 @@
 const router = require('express').Router()
+const nodemail = require('../mail/nodemail')
+import bodyParser from 'body-parser'
+import { Request, Response } from 'express'
 
-router.get('/', (req, res) => {
+router.get('/', (req: Request, res: Response) => {
     return res.json({ 
         message: "Welcome to my API",
         author: "Carlos Alves",
@@ -9,10 +12,10 @@ router.get('/', (req, res) => {
     })
 })
 
-router.get('/subscribe', (req, res) => {
-    return res.json({
-        message: "Submit"
-    })
+router.post('/subscribe', (req: Request, res: Response) => {
+    nodemail(req.body.name, req.body.email)
+        .then((response: any) => res.json(response))
+        .catch((err: any) => res.json({ message: "Ops, we have a problem!"}))
 })
 
-module.exports = router
+export = router
