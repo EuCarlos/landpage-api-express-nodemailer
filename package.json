@@ -6,7 +6,8 @@
   "repository": "https://github.com/EuCarlos/landpage-api-express-nodemailer.git",
   "author": "Carlos Alves",
   "scripts": {
-    "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/server.ts"
+    "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/server.ts",
+    "database": "prisma studio --browser none"
   },
   "dependencies": {
     "@prisma/client": "^3.6.0",

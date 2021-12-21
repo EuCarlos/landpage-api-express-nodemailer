@@ -1,6 +1,7 @@
 const router = require('express').Router()
 import nodemail from 'src/mail/nodemail'
 import { Request, Response } from 'express'
+import prismaClient from 'src/prisma'
 
 router.get('/', (req: Request, res: Response) => {
     return res.json({ 
@@ -20,31 +21,29 @@ router.post('/subscribe', (req: Request, res: Response) => {
         marketing = req.body.marketing,
         police = req.body.police
 
-    
     nodemail(name, email)
-        .then((response: any) => res.json(response))
-        .catch((err: any) => res.json({ message: "Ops, we have a problem! this is a error: " + err }))
+
+    prismaClient.subscriber.create({
+        data: { name, email, company, website, marketing, police }
+    })
+        .then(response =>  res.json(response))
+        .catch(err => res.json(err))
 })
 
-router.get('/messages', (req: Request, res: Response) => {
-    const example = [
-        { id: 1, message: "example 1" },
-        { id: 2, message: "example 2" },
-        { id: 3, message: "example 3" },
-        { id: 4, message: "example 4" }
-    ]
+router.get('/admin', async (req: Request, res: Response) => {
+    const messages = await prismaClient.subscriber.findMany({
+        select: {
+            id: true,
+            name: true,
+            email: true,
+            company: true,
+            website: true,
+            marketing: true,
+            police: true
+        }
+    })
 
-    return res.json(example)
-})
-
-router.post('/send_message', (req: Request, res: Response) => {
-    const
-        id = req.body.id,
-        text = req.body.text,
-        name = req.body.user.name,
-        avatar_url = req.body.user.avatar_url 
-
-    res.json({ id, text, user: {name, avatar_url} })
+    res.json(messages)
 })
 
 export = router
