@@ -31,7 +31,7 @@ router.post('/subscribe', (req: Request, res: Response) => {
 })
 
 router.get('/admin', async (req: Request, res: Response) => {
-    const messages = await prismaClient.subscriber.findMany({
+    const subscribers = await prismaClient.subscriber.findMany({
         select: {
             id: true,
             name: true,
@@ -39,11 +39,44 @@ router.get('/admin', async (req: Request, res: Response) => {
             company: true,
             website: true,
             marketing: true,
-            police: true
+            police: true,
+            created_at: true
+        }
+    })
+
+    res.json(subscribers)
+})
+
+router.get('/messages', async (req: Request, res: Response) => {
+    const messages = await prismaClient.message.findMany({
+        take: 3,
+        select: {
+            id: true,
+            text: true,
+            name: true,
+            avatar_url: true,
+            created_at: true
         }
     })
 
     res.json(messages)
+})
+
+router.post('/send_message', (req: Request, res: Response) => {
+    const
+        text = req.body.text,
+        name = req.body.user.name,
+        avatar_url = req.body.user.avatar_url
+
+    prismaClient.message.create({
+        data: {
+            name,
+            text,
+            avatar_url
+        }
+    })
+        .then(response => res.json(response))
+        .catch(err => res.json(err))
 })
 
 export = router

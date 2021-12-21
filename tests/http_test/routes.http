@@ -1,6 +1,9 @@
 ### Route - root
 GET http://localhost:3000/
 
+### Route - admin
+GET http://localhost:3000/admin
+
 ### Route - subscribe
 POST http://localhost:3000/subscribe
 Content-Type: application/json
@@ -14,14 +17,13 @@ Content-Type: application/json
     "police": true
 }
 
-### Route - root
+### Route - messages
 GET http://localhost:3000/messages
 ### Route - send_comments
 POST http://localhost:3000/send_message
 Content-Type: application/json
 
 {
-    "id": ,
     "text": "",
     "user": {
         "name": "",
