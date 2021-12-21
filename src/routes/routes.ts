@@ -47,6 +47,16 @@ router.get('/admin', async (req: Request, res: Response) => {
     res.json(subscribers)
 })
 
+router.delete('/subscribe/delete/:id', async (req: Request, res: Response) => {
+    await prismaClient.subscriber.delete({
+        where: {
+            id: req.params.id
+        }
+    })
+        .then(() => res.json({ message: "Subscriber deleted successfully"}))
+        .catch(() => res.json({ message: "Ops, subscribe not deleted"}))
+})
+
 router.get('/messages', async (req: Request, res: Response) => {
     const messages = await prismaClient.message.findMany({
         take: 3,
@@ -77,6 +87,18 @@ router.post('/send_message', (req: Request, res: Response) => {
     })
         .then(response => res.json(response))
         .catch(err => res.json(err))
+})
+
+router.delete('/messages/delete/:id', async (req: Request, res: Response) => {
+    await prismaClient.message.delete({
+        where: {
+            id: req.params.id
+        }
+    })
+        .then(() => res.json({ message: "Message deleted successfully"}))
+        .catch(() => res.json({ message: "Ops, message not deleted"}))
+
+    
 })
 
 export = router

@@ -17,8 +17,13 @@ Content-Type: application/json
     "police": true
 }
 
+# Route -  delete subscriber
+DELETE http://localhost:3000/subscribe/delete/:id
+
+
 ### Route - messages
 GET http://localhost:3000/messages
+
 ### Route - send_comments
 POST http://localhost:3000/send_message
 Content-Type: application/json
@@ -30,3 +35,6 @@ Content-Type: application/json
         "avatar_url": "" 
     }
 }
+
+# Route -  delete messages
+DELETE http://localhost:3000/messages/delete/:id
