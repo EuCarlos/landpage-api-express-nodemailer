@@ -1,4 +1,5 @@
 # LandPage React
+_Para a versão em português deste README, [clique aqui](/locales/pt_BR/README.md)._
 ## Project description
 LandPage created with react and typescript inspired by the landpage of [Inbound Emotion](https://www.inboundemotion.com/es/diccionario-inbound-marketing)
 
